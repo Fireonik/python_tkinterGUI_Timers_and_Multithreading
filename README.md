@@ -1,5 +1,3 @@
-this readme isn't formatted to be read in the preview form
-
 learning process of the python tkinterGUI and other topics needed to develop timers app
 
 nov 17: I'm done trying to learn pyqt, switching to tkinter, created repository

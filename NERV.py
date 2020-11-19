@@ -24,4 +24,5 @@ canvas.create_window(480, 320, window=line3)
 canvas.create_window(230, 475, window=line4)
 canvas.create_window(575, 560, window=line5)
 
+root.resizable(False, False)
 root.mainloop()

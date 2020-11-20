@@ -33,38 +33,19 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="consentGiven" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Clarity\Documents\GitHub\python_tkinterGUI_Timers_and_Multithreading" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Clarity\Documents\GitHub\python_tkinterGUI_Timers_and_Multithreading" />
     </key>
   </component>
   <component name="RunManager" selected="Python.gui">
-    <configuration name="NERV (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="python_tkinterGUI_Timers_and_Multithreading" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NERV.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="NERV" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python_tkinterGUI_Timers_and_Multithreading" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,6 +130,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python_tkinterGUI_Timers_and_Multithreading" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="tkinterplayground1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python_tkinterGUI_Timers_and_Multithreading" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -173,10 +175,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.gui" />
-        <item itemvalue="Python.RAG" />
-        <item itemvalue="Python.NERV (1)" />
-        <item itemvalue="Python.NERV" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.tkinterplayground1 (1)" />
+        <item itemvalue="Python.RAG" />
+        <item itemvalue="Python.NERV" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +206,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="466" y="203" key="#Inspections" timestamp="1605837639497">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="466" y="203" key="#Inspections/0.0.1680.1050@0.0.1680.1050" timestamp="1605837639497" />
     <state x="231" y="239" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605469449749">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -212,22 +218,26 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="567" y="563" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1605468629319" />
-    <state width="1659" height="268" key="GridCell.Tab.0.bottom" timestamp="1605784333467">
+    <state x="698" y="294" key="FileChooserDialogImpl" timestamp="1605845081886">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="268" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1605784333467" />
-    <state width="1659" height="268" key="GridCell.Tab.0.center" timestamp="1605784333466">
+    <state x="698" y="294" key="FileChooserDialogImpl/0.0.1680.1050@0.0.1680.1050" timestamp="1605845081886" />
+    <state width="1659" height="268" key="GridCell.Tab.0.bottom" timestamp="1605872445948">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="268" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1605784333466" />
-    <state width="1659" height="268" key="GridCell.Tab.0.left" timestamp="1605784333466">
+    <state width="1659" height="268" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1605872445948" />
+    <state width="1659" height="268" key="GridCell.Tab.0.center" timestamp="1605872445948">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="268" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1605784333466" />
-    <state width="1659" height="268" key="GridCell.Tab.0.right" timestamp="1605784333467">
+    <state width="1659" height="268" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1605872445948" />
+    <state width="1659" height="268" key="GridCell.Tab.0.left" timestamp="1605872445948">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="268" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605784333467" />
+    <state width="1659" height="268" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1605872445948" />
+    <state width="1659" height="268" key="GridCell.Tab.0.right" timestamp="1605872445948">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1659" height="268" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605872445948" />
     <state width="1659" height="351" key="GridCell.Tab.1.bottom" timestamp="1605706398797">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -244,14 +254,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="351" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605706398797" />
+    <state x="274" y="165" key="SettingsEditor" timestamp="1605872401356">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="274" y="165" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1605872401356" />
     <state x="223" y="196" width="1200" height="800" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605469307339">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="223" y="196" width="1200" height="800" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605469307339" />
-    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1605783567711">
+    <state x="335" y="274" width="621" height="451" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1605852368544">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1605783567711" />
+    <state x="335" y="274" width="621" height="451" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605852368544" />
+    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1605861042891">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1605861042891" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

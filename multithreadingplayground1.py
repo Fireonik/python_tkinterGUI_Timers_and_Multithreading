@@ -24,3 +24,10 @@ class Factory:
 
 factory1 = Factory()
 factory1.work()
+
+@thread
+def resize(a):
+    canvas.config(width=650, height=600, scrollregion=(0, 0, 650, len(a)*400))
+    root.after(1000, resize, a)
+
+resize(A)

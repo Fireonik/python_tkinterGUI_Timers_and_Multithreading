@@ -9,3 +9,9 @@ nov 18: practiced using simplest widgets, fonts, colors, and canvas widget in pa
 nov 19: learned how to make buttons with custom icons to keep GUI nice and simple, 
         and how to modificate icons in paint.NET, how to make tkinter canvas scrollable, 
         learned basics on parallel threads, learned about @decorators in python
+
+nov 20: learned about creating windows separate from main in tkinter, how to change 
+        contents of the current window, how to remove borders of the buttons, how to
+        create combobox and set a default value to it, done some designing work on 
+        the timer system, also learned about extensions system in pycharm and tried
+        deep code AI

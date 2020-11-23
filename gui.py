@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import font
+from tkinter import messagebox
+from copy import deepcopy
+from playsound import playsound
 import threading
 
 
@@ -8,6 +11,8 @@ class EditingWindow:
     def __init__(self):
         self.__interval = [0]
         self.__signal = ""
+        self.__label = []
+        self.__label_text = []
 
     @property
     def interval(self):
@@ -25,6 +30,22 @@ class EditingWindow:
     def signal(self, val):
         self.__signal = val
 
+    @property
+    def label(self):
+        return self.__label
+
+    @label.setter
+    def label(self, var):
+        self.__label = var
+
+    @property
+    def label_text(self):
+        return self.__label_text
+
+    @label_text.setter
+    def label_text(self, var):
+        self.__label_text = var
+
 
 def thread(fn):
     def execute(*args, **kwargs):
@@ -34,20 +55,37 @@ def thread(fn):
 
 
 @thread
-def count():
-    global timers
+def sound_thread(filename):
     try:
-        temp = timers[0].interval
-        print(timers[0].interval)
-        temp[0] -= 1
-        timers[0].interval = temp
-        print(timers[0].interval)
-        if timers[0].interval[0] == 0:
-            if timers[0].signal =='Ping1':
-                from playsound import playsound
-                playsound("Ping1.mp3")
-    except Exception:
+        playsound(filename)
+    except UnicodeDecodeError:
         pass
+
+
+@thread
+def message_thread():
+    messagebox.showinfo(title="NERV", message="Timer expired")
+
+
+@thread
+def count():
+    global timers, text1, timer_list
+    size = len(timers)
+    timer_list.config(scrollregion=(0, 0, 285, 100+40*size))
+    print(size)
+    for i in range(size):
+        try:
+            timers[i].interval[0] -= 1
+            print(timers[i].interval)
+            a = StringVar()
+            a.set(str(timers[i].interval[0]))
+            timers[i].label_text[0].set(str(timers[i].interval[0]))
+            if timers[i].interval[0] == 0:
+                sound_thread(timers[i].signal + ".mp3")
+                message_thread()
+                del timers[i]
+        except IndexError:
+            pass
     root.after(1000, count)
 
 
@@ -55,24 +93,43 @@ def scroll(event):
     timer_list.yview_scroll(int(event.delta / 120), "units")
 
 
+def add_timer():
+    global temp_window_data
 
+    def confirm_add():
+        global temp_window_data, timers, timer_list, century30
+        nonlocal editing_window
+        if temp_window_data.interval[0] == 0:
+            messagebox.showerror(title="NERV", message="Can't add timer without interval")
+            editing_window.destroy()
+        else:
+            timers.append(EditingWindow())
+            timers[-1].interval = deepcopy(temp_window_data.interval)
+            timers[-1].signal = deepcopy(temp_window_data.signal)
+            temp_label_text = []
+            temp_text = StringVar()
+            temp_label_text.append(temp_text)
 
-
-def add_timer(a):
-    global timers
-    timers.append(EditingWindow())
+            temp_label_text[0].set(str(timers[-1].interval[0]))
+            timers[-1].label_text = temp_label_text
+            temp_label = ttk.Label(timer_list, textvariable=temp_label_text, font=century30)
+            timers[-1].label.append(temp_label)
+            timer_list.create_window(125, 20+40*(len(timers)-1), window=timers[-1].label)
+            temp_window_data.interval[0] = 0
+            temp_window_data.signal = ""
+            editing_window.destroy()
 
     editing_window = Toplevel(root)
     editing_window.resizable(False, False)
-    editing_space = Frame(editing_window, width=300, height=300, background='black', highlightthickness=0)
+    editing_space = Frame(editing_window, width=300, height=300, highlightthickness=0)
     editing_space.grid(rows=10, columns=10)
-    button1 = ttk.Button(editing_space, text="THE POPUP").grid(row=9, column=0)
+    ttk.Button(editing_space, text="Confirm", command=confirm_add).grid(row=0, column=9)
 
     type_setting = StringVar()
     type_setting.set("")
     type_setting1 = type_setting.get()  # protection from garbage collector
-    timer_setting = ttk.Combobox(editing_space, textvariable=type_setting1, values=("Timer", "Alarm"), state='readonly'
-                                 , width=6)
+    timer_setting = ttk.Combobox(editing_space, textvariable=type_setting1, values=("Timer", "Alarm"), state='readonly',
+                                 width=6)
     timer_setting.grid(row=0, column=0)
 
     days = IntVar()
@@ -88,21 +145,21 @@ def add_timer(a):
     month_list = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
                   'November', 'December')
 
-    days_label = Label(editing_space, text='ddd', background='black', foreground='white')
-    hours_label = Label(editing_space, text='hh', background='black', foreground='white')
-    minutes_label = Label(editing_space, text='mm', background='black', foreground='white')
-    seconds_label = Label(editing_space, text='ss', background='black', foreground='white')
+    days_label = Label(editing_space, text='ddd')
+    hours_label = Label(editing_space, text='hh')
+    minutes_label = Label(editing_space, text='mm')
+    seconds_label = Label(editing_space, text='ss')
     days_spinbox = ttk.Spinbox(editing_space, from_=0, to=365, textvariable=days, state='readonly', width=3)
     hours_spinbox = ttk.Spinbox(editing_space, from_=0, to=23, textvariable=hours, state='readonly', width=2)
     minutes_spinbox = ttk.Spinbox(editing_space, from_=0, to=59, textvariable=minutes, state='readonly',
                                   width=2)
     seconds_spinbox = ttk.Spinbox(editing_space, from_=0, to=59, textvariable=seconds, state='readonly',
                                   width=2)
-    month_label = Label(editing_space, text='month', background='black', foreground='white')
-    day_label = Label(editing_space, text='dd', background='black', foreground='white')
-    hour_label = Label(editing_space, text='hh', background='black', foreground='white')
-    minute_label = Label(editing_space, text='mm', background='black', foreground='white')
-    second_label = Label(editing_space, text='ss', background='black', foreground='white')
+    month_label = Label(editing_space, text='month')
+    day_label = Label(editing_space, text='dd')
+    hour_label = Label(editing_space, text='hh')
+    minute_label = Label(editing_space, text='mm')
+    second_label = Label(editing_space, text='ss')
     month_spinbox = ttk.Spinbox(editing_space, values=month_list, textvariable=month, state='readonly', width=10)
 
     signal_combobox = ttk.Combobox(editing_space, textvariable=signal, values=("Ping1", "Ping2", "Auratone", "Happyday", "Softchime"),
@@ -140,12 +197,12 @@ def add_timer(a):
     month_spinbox.grid_forget()
 
     def signal_setup(event):
-        global timers
-        timers[-1].signal = signal_combobox.get()
+        global temp_window_data
+        temp_window_data.signal = signal_combobox.get()
 
     def interval_setup(event):  # weird, why python doesn't see this argument is used
-        global timers
-        timers[-1].interval = [0]
+        global temp_window_data
+        temp_window_data.interval = [0]
         if timer_setting.get() == "Timer":
             month_label.grid_forget()
             day_label.grid_forget()
@@ -169,10 +226,8 @@ def add_timer(a):
                         return
                 except ValueError:
                     return
-                global timers
-                temp = timers[-1].interval
-                temp[0] += 1
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] += 1
 
             def interval_increment_minutes(event):
                 try:
@@ -180,10 +235,8 @@ def add_timer(a):
                         return
                 except ValueError:
                     return
-                global timers
-                temp = timers[-1].interval
-                temp[0] += 60
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] += 60
 
             def interval_increment_hours(event):
                 try:
@@ -191,10 +244,8 @@ def add_timer(a):
                         return
                 except ValueError:
                     return
-                global timers
-                temp = timers[-1].interval
-                temp[0] += 3600
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] += 3600
 
             def interval_increment_days(event):
                 try:
@@ -202,43 +253,32 @@ def add_timer(a):
                         return
                 except ValueError:
                     return
-                global timers
-                temp = timers[-1].interval
-                temp[0] += 86400
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] += 86400
 
             def interval_decrement_seconds(event):
-                global timers
-                temp = timers[-1].interval
-                temp[0] -= 1
-                if temp[0] < 0:
-                    temp[0] = 0
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] -= 1
+                if temp_window_data.interval[0] < 0:
+                    temp_window_data.interval[0] = 0
 
             def interval_decrement_minutes(event):
-                global timers
-                temp = timers[-1].interval
-                temp[0] -= 60
-                if temp[0] < 0:
-                    temp[0] = 0
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] -= 60
+                if temp_window_data.interval[0] < 0:
+                    temp_window_data.interval[0] = 0
 
             def interval_decrement_hours(event):
-                global timers
-                temp = timers[-1].interval
-                temp[0] -= 3600
-                if temp[0] < 0:
-                    temp[0] = 0
-                timers[-1].interval = temp
+                global temp_window_data
+                temp_window_data.interval[0] -= 3600
+                if temp_window_data.interval[0] < 0:
+                    temp_window_data.interval[0] = 0
 
             def interval_decrement_days(event):
-                global timers
-                temp = timers[-1].interval
-                temp[0] -= 86400
-                if temp[0] < 0:
-                    temp[0] = 0
-                timers[-1].interval = temp
-
+                global temp_window_data
+                temp_window_data.interval[0] -= 86400
+                if temp_window_data.interval[0] < 0:
+                    temp_window_data.interval[0] = 0
 
             seconds_spinbox.bind('<<Increment>>', interval_increment_seconds)
             minutes_spinbox.bind('<<Increment>>', interval_increment_minutes)
@@ -269,50 +309,43 @@ def add_timer(a):
     timer_setting.bind('<<ComboboxSelected>>', interval_setup)
     signal_combobox.bind("<<ComboboxSelected>>", signal_setup)
 
+
 timers = []
+
+temp_window_data = EditingWindow()
+temp_window_data.interval[0] = 0
 # setting up space for widgets
 root = Tk()
 root.title("NERV")
 
-frame = Frame(root, borderwidth=0, background='black', padx=0, pady=0)
+frame = Frame(root, borderwidth=0, padx=0, pady=0)
 frame.grid()
 
-timer_list = Canvas(frame, width=650, height=600, scrollregion=(0, 0, 650, 1200), background='black',
-                    highlightthickness=0)
+timer_list = Canvas(frame, width=285, height=200, scrollregion=(0, 0, 285, 1200), highlightthickness=0)
 scroll_x = Scrollbar(timer_list, orient="horizontal", command=timer_list.xview)
 scroll_y = Scrollbar(timer_list, orient="vertical", command=timer_list.yview)
-sidebar = Canvas(frame, background='black', width=100, height=600, highlightthickness=0)
+sidebar = Canvas(frame, width=25, height=200, highlightthickness=0)
 
-timer_list.grid(row=0, column=0)
+timer_list.grid(row=0, column=0, sticky=NW)
 timer_list.configure(yscrollcommand=scroll_y.set, xscrollcommand=scroll_x.set)
 timer_list.bind_all("<MouseWheel>", scroll)
 sidebar.grid(row=0, column=1)
 
-intervals = ['10000000000']
 
-text1 = StringVar()
-text1.set(intervals[0])
-century65 = font.Font(family="Century", name="Century65", size=65)
-timer_settings = PhotoImage(file="clock_settings50px.gif")
-settings = PhotoImage(file="settings50px.gif")
-filter_icon = PhotoImage(file="filter50px.gif")
-add_icon = PhotoImage(file="add50px.gif")
+century30 = font.Font(family="Century", name="Century30", size=30)
+timer_settings = PhotoImage(file="timer_settings25px.gif")
+settings = PhotoImage(file="settings24px.gif")
+add_icon = PhotoImage(file="add24.gif")
 
-label = ttk.Label(timer_list, textvariable=text1, font=century65, background='black', foreground='white')
-button_timer_settings = Button(timer_list, image=timer_settings, bg="black", bd=0, highlightthickness=0,
-                               activebackground='black')
-button = Button(timer_list, text="1234")
-button_settings = Button(sidebar, image=settings, bg="black", bd=0, highlightthickness=0, activebackground='black')
-button_filter = Button(sidebar, image=filter_icon, bg="black", bd=0, highlightthickness=0, activebackground='black')
-button_add = Button(sidebar, image=add_icon, command=lambda: add_timer(intervals), bg='black', bd=0,
-                    highlightthickness=0, activebackground='black')
 
-timer_list.create_window(300, 60, window=label)
-timer_list.create_window(600, 65, window=button_timer_settings)
-timer_list.create_window(400, 1100, window=button)
-sidebar.create_window(50, 65, window=button_settings)
-sidebar.create_window(50, 125, window=button_filter)
-sidebar.create_window(50, 185, window=button_add)
+button_timer_settings = Button(timer_list, image=timer_settings, bd=0, highlightthickness=0)
+button_settings = Button(sidebar, image=settings, bd=0, highlightthickness=0)
+button_add = Button(sidebar, image=add_icon, command=lambda: add_timer(), bd=0,)
+
+
+timer_list.create_window(260, 21, window=button_timer_settings)
+sidebar.create_window(10, 20, window=button_settings)
+sidebar.create_window(10, 55, window=button_add)
 
 count()
 

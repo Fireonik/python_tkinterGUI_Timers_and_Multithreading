@@ -22,13 +22,14 @@ nov 20-23: developed core features of the timers: timers can be added with a cus
            displaying remaining time as it ticks; visual style of the app went through
            redesign, now the app is very compact and light-looking. Most importantly,
            timers work, and their ticking and signal displaying are handled with separate
-           threads so that time does not stop ticking while UI is used; i learned some
-           other things, but i dont remember everything that happened in these 3 days;
-           Designing a program that works not as a linear sequence of events, but as a 
-           system which does its task responding to commands issued at any time, while 
-           some of its processes run all the time in parallel was very different experience
-           from everything i have developed up to this point; 
-           Also since tkinter does not support background pictures and i want to force 
-           my app to look nice, (anything consisting of comboboxes on white background
-           is ugly, basically) i developed idea how to force tkinter to support background,
-           the plan is crutchy, but hillarious
+           threads so that time does not stop ticking while UI is used;  
+           Also since i want my app to look nice, (anything consisting of comboboxes on 
+           white background is ugly, basically) i developed idea on how to implement 
+           background in tkinter
+
+nov 25-26: implemented background, learned some design basics like using color palettes, 
+           tweaked icons, changed font, implemented conversion of the time interval in
+           seconds into time format, encountered memory leaks, reworked multithreading
+           to eliminate all leaks (yet still didnt figure out how looped creation-destruction
+           of the thread causes it), cleaned up the code a bit, added a few comments, fixed
+           a few problems in the code 

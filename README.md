@@ -32,4 +32,6 @@ nov 25-26: implemented background, learned some design basics like using color p
            seconds into time format, encountered memory leaks, reworked multithreading
            to eliminate all leaks (yet still didnt figure out how looped creation-destruction
            of the thread causes it), cleaned up the code a bit, added a few comments, fixed
-           a few problems in the code 
+           a few problems in the code
+
+nov 30:    strange bug already wasted abyss of time and looks like it is going to waste another

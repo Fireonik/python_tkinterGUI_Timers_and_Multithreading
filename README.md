@@ -35,3 +35,7 @@ nov 25-26: implemented background, learned some design basics like using color p
            a few problems in the code
 
 nov 30:    strange bug already wasted abyss of time and looks like it is going to waste another
+
+dec 1:     finally fixed the bug, created interface for alarm setup, reworked  ~ >50% of code
+           while searching for the bug, achieving much shorter, more readable and simple code
+           than before

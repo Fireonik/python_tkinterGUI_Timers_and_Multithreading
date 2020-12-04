@@ -39,3 +39,12 @@ nov 30:    strange bug already wasted abyss of time and looks like it is going t
 dec 1:     finally fixed the bug, created interface for alarm setup, reworked  ~ >50% of code
            while searching for the bug, achieving much shorter, more readable and simple code
            than before
+
+dec 2-3    implemented alarms, timers and alarms can be deleted by user now, implemented sorting
+           by filter (well, yeah, tkinter is, um, a bit limited in its capabilities: since there
+           is no way to temporarily remove widgets from canvas, proper filtering was impossible
+           to implement (well, maybe it was possible with a complete redesign of a program)
+           and also i discovered that tkinter does not support operations with taskbar: it can't
+           minimize into tray, it can't display anything on taskbar icon and now i can't do
+           precisely the additional tasks i planned to do; I also made some funny sound signals
+           so that they don't sound utterly generic

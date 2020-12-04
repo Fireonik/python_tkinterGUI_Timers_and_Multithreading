@@ -11,12 +11,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdabb935-4350-4f4e-8686-129ccccb50c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/filter.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/remove.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/SimonRed1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/add24.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/filter.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/filter25px.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/remove.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/settings24px.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/timer_settings25px.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/very_sad_Icon.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/volume_off.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/icons/volume_on.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/save.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/AlarmWentOff.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Auratone.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Happyday.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Ping1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Ping2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Plan.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/Softchime.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/sound_signals/TimerExpired.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlarmWentOff.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auratone.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Happyday.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ping1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ping2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plan.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Softchime.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimerExpired.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/add24.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/filter.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/filter25px.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/remove.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/save.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings24px.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/timer_settings25px.gif" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,28 +87,7 @@
       <recent name="C:\Users\Clarity\Documents\GitHub\python_tkinterGUI_Timers_and_Multithreading" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.gui">
-    <configuration name="NERV" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python_tkinterGUI_Timers_and_Multithreading" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tkinterplayground1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.lab2">
     <configuration name="RAG" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python_tkinterGUI_Timers_and_Multithreading" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,6 +122,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lab2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python_tkinterGUI_Timers_and_Multithreading" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,11 +216,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.lab2" />
         <item itemvalue="Python.gui" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.tkinterplayground1 (1)" />
         <item itemvalue="Python.RAG" />
-        <item itemvalue="Python.NERV" />
       </list>
     </recent_temporary>
   </component>

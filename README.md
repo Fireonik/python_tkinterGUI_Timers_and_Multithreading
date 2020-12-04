@@ -48,3 +48,5 @@ dec 2-3    implemented alarms, timers and alarms can be deleted by user now, imp
            minimize into tray, it can't display anything on taskbar icon and now i can't do
            precisely the additional tasks i planned to do; I also made some funny sound signals
            so that they don't sound utterly generic
+
+dec 4      implemented 'do not disturb' mode, *ill finish this entry tomorrow*

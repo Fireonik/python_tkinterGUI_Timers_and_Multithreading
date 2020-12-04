@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import font
 from tkinter import messagebox
 from copy import deepcopy
@@ -8,9 +7,12 @@ from PIL import ImageTk
 import threading
 import math
 import time
+import pickle
 
 
 class Timer:
+    last_id = 0
+
     def __init__(self):
         self.interval = 0
         self.signal = 'Auratone'
@@ -18,6 +20,13 @@ class Timer:
         self.label_text = StringVar()
         self.type = ''
         self.time_point = {}
+        self.button = []
+        self.id = 0
+
+
+def generate_id():
+    Timer.last_id += 1
+    return deepcopy(Timer.last_id)
 
 
 def thread(fn):
@@ -58,6 +67,77 @@ def interval_formatted(i):
     return temp[0] + temp[1] + temp[2] + temp[3]
 
 
+def delete(id_):
+    for index in range(len(timers)):
+        if timers[index].id == id_:
+            timers[index].label[0].destroy()
+            timers[index].button[0].destroy()
+            del timers[index]
+            refresh_timer_list()
+            return
+
+
+def filter_setting():
+    def set_state(a):
+        global filter_state
+        filter_state = a
+        refresh_timer_list()
+
+    filter_setting_window = Toplevel()
+    filter_setting_window.attributes("-topmost", True)
+    filter_setting_window.geometry('309x39' + '+' + str(root.winfo_rootx() + 60) + '+' + str(root.winfo_rooty() + 50))
+    Button(filter_setting_window, text="Timers", command=lambda : set_state('Timer'), font=font.Font(family='Bodoni MT', size=14),
+           foreground='#622651').grid(row=0, column=0, ipadx=10)
+    Button(filter_setting_window, text="Everything", command=lambda : set_state('Everything'),  font=font.Font(family='Bodoni MT', size=14),
+           foreground='#622651').grid(row=0, column=1, ipadx=10)
+    Button(filter_setting_window, text="Alarms", command=lambda : set_state('Alarm'),  font=font.Font(family='Bodoni MT', size=14),
+           foreground='#622651').grid(row=0, column=2, ipadx=10)
+
+
+def refresh_timer_list():
+    def actually_just_refresh():
+        for j in range(len(timers)):
+            timer_list.create_window(240, 40 * j, window=timers[j].label[0], anchor='ne')
+            timer_list.create_window(260, (40 * j) + 15, window=timers[j].button[0], anchor='ne')
+
+    def sort_by_type():  # it is so brutal because tkinter cant temporarily remove widget from canvas
+
+        # get space to put stuff into
+        canvas_size = 100+40*len(timers)
+        timer_list.config(scrollregion=(0, 0, 265, 2 * canvas_size))
+
+        # put everything somewhere else
+        for i in range(len(timers)):
+            timer_list.create_window(240, canvas_size + (40 * i), window=timers[i].label[0], anchor='ne')
+            timer_list.create_window(260, canvas_size + ((40 * i) + 15), window=timers[i].button[0], anchor='ne')
+
+        # put chosen type back
+        index = 0
+        for i in range(len(timers)):
+            if filter_state == timers[i].type:
+                timer_list.create_window(240, 40 * index, window=timers[i].label[0], anchor='ne')
+                timer_list.create_window(260, (40 * index) + 15, window=timers[i].button[0], anchor='ne')
+                index += 1
+
+        # put the other type back
+        for i in range(len(timers)):
+            if filter_state != timers[i].type:
+                timer_list.create_window(240, 40 * index, window=timers[i].label[0], anchor='ne')
+                timer_list.create_window(260, (40 * index) + 15, window=timers[i].button[0], anchor='ne')
+                index += 1
+
+        # get rid of unnecessary space
+        timer_list.config(scrollregion=(0, 0, 265, canvas_size))
+
+    if len(timers) == 0:
+        return
+
+    if filter_state == 'Everything':
+        actually_just_refresh()
+    else:
+        sort_by_type()
+
+
 @thread
 def count():
     def one_thread_is_enough():
@@ -71,26 +151,40 @@ def count():
                     sound_thread(timers[ind].signal + ".mp3")
                     message_thread()
                     timers[ind].label[0].destroy()
+                    timers[ind].button[0].destroy()
                     del timers[ind]
                     return True
                 return False
             except IndexError:
                 pass
+
+        def alarm_checking(ind):
+            try:
+                curr = time.localtime()
+                alarm = timers[ind].time_point
+                if curr.tm_mon == alarm.get('month') and curr.tm_mday == alarm.get('day') and curr.tm_hour == alarm.get('hour') and curr.tm_min == alarm.get('minute') and curr.tm_sec == alarm.get('second'):
+                    sound_thread(timers[ind].signal + '.mp3')
+                    message_thread()
+                    timers[ind].label[0].destroy()
+                    timers[ind].button[0].destroy()
+                    del timers[ind]
+                    return True
+                return False
+            except IndexError:
+                pass
+
         size = len(timers)
         timer_list.config(scrollregion=(0, 0, 265, 100+40*size))
         if size > 0:
             for i in range(size):
-                if timer_ticking(i):
-                    timer_was_deleted = True
+                try:
+                    if timers[i].type == 'Timer' and timer_ticking(i) or timers[i].type == 'Alarm' and alarm_checking(i):
+                        timer_was_deleted = True
+                except IndexError:
+                    pass
         if timer_was_deleted:
-            for i in range(len(timers)):
-                timers[i].label[0].destroy()
-                del timers[i].label[0]
-                temp_label = Label(timer_list, textvariable=timers[i].label_text, font=bodoni26, foreground='#622651')
-                timers[i].label.append(temp_label)
-                timer_list.create_window(260, 40 * i, window=timers[i].label[0], anchor='ne')
-                timer_was_deleted = False
-        del size
+            refresh_timer_list()
+            timer_was_deleted = False
         root.after(1000, one_thread_is_enough)
     one_thread_is_enough()
 
@@ -108,7 +202,7 @@ def minimize_bg(event=None):
 def unminimize_bg(event=None):
     global window2, root
     window2.deiconify()
-    root.deiconify()  # WTF
+    root.deiconify()
 
 
 def force_background(event=None):
@@ -129,13 +223,18 @@ def timer_setup():
         if interval <= 0:
             messagebox.showwarning(title='NERV', message='Invalid interval')
             return
+
         timers.append(Timer())
         timers[-1].type = 'Timer'
+        timers[-1].id = generate_id()
         timers[-1].interval = interval
         timers[-1].signal = signal.get()
         timers[-1].label_text.set(interval_formatted(-1))
         timers[-1].label.append(Label(timer_list, textvariable=timers[-1].label_text, font=bodoni26, foreground='#622651'))
-        timer_list.create_window(260, 40 * (len(timers) - 1), window=timers[-1].label[0], anchor='ne')
+        the_id = deepcopy(timers[-1].id)
+        timers[-1].button.append(Button(timer_list, image=remove_icon, command=lambda: delete(the_id), relief='flat', highlightthickness=1, bd=0))
+        timer_list.create_window(240, 40 * (len(timers) - 1), window=timers[-1].label[0], anchor='ne')
+        timer_list.create_window(260, (40 * (len(timers) - 1)) + 15, window=timers[-1].button[0], anchor='ne')
         timer_setup_window.destroy()
 
     timer_setup_window = Toplevel()
@@ -150,7 +249,7 @@ def timer_setup():
     minutes.grid(row=1, column=2)
     seconds = Spinbox(timer_setup_window, from_=0, to=59, width=2, font=bodoni14, state='readonly', foreground='#622651')
     seconds.grid(row=1, column=3)
-    signal = Spinbox(timer_setup_window, values=("Auratone", "Softchime", "Happyday", "Ping1", "Ping2"), font=bodoni14, state='readonly', foreground='#622651')
+    signal = Spinbox(timer_setup_window, values=('Plan', 'TimerExpired', 'AlarmWentOff', "Auratone", "Softchime", "Happyday", "Ping1", "Ping2"), font=bodoni14, state='readonly', foreground='#622651')
     signal.grid(row=1, column=4)
     Button(timer_setup_window, command=confirm_add, text="OK", font=font.Font(family='Bodoni MT', size=16)).grid(row=0, column=5, rowspan=2, columnspan=2, ipady=6, padx=3, ipadx=15)
     Label(timer_setup_window, text='ddd', font=bodoni14, foreground='#622651').grid(row=0, column=0, sticky='w')
@@ -177,6 +276,7 @@ def alarm_setup():
             return
         timers.append(Timer())
         timers[-1].type = 'Alarm'
+        timers[-1].id = generate_id()
         timers[-1].time_point['month'] = int(month.get())
         timers[-1].time_point['day'] = int(day.get())
         timers[-1].time_point['hour'] = int(hour.get())
@@ -185,7 +285,10 @@ def alarm_setup():
         timers[-1].signal = signal.get()
         timers[-1].label_text.set(time_point_formatted(month.get(), day.get(), hour.get(), minute.get(), second.get()))
         timers[-1].label.append(Label(timer_list, textvariable=timers[-1].label_text, font=bodoni26, foreground='#622651'))
-        timer_list.create_window(260, 40 * (len(timers)-1), window=timers[-1].label[0], anchor='ne')
+        the_id = deepcopy(timers[-1].id)
+        timers[-1].button.append(Button(timer_list, image=remove_icon, command=lambda: delete(the_id), relief='flat', highlightthickness=1, bd=0))
+        timer_list.create_window(240, 40 * (len(timers) - 1), window=timers[-1].label[0], anchor='ne')
+        timer_list.create_window(260, (40 * (len(timers) - 1)) + 15, window=timers[-1].button[0], anchor='ne')
         nonlocal alarm_setup_window
         alarm_setup_window.destroy()
 
@@ -230,15 +333,81 @@ def add():
     Button(timer_setup_window, text="Alarm", command=move_to_alarm_setup, font=font.Font(family='Bodoni MT', size=14), foreground='#622651').grid(row=0, column=1, ipadx=10)
 
 
+def save():
+    if len(timers) == 0:
+        exit()
+
+    # tkinter widgets can not be pickled, fortunately we don't have to save them
+    for i in range(len(timers)):
+        timers[i].label.clear()
+        del timers[i].label_text
+        timers[i].button.clear()
+
+    data = [timers, timer_was_deleted, filter_state]
+    try:
+        with open('save.bin', 'wb') as save_file:
+            pickle.dump(data, save_file)
+            exit()
+    except pickle.PicklingError:
+        exit(1)
+
+
+
+def load():
+    global timers, timer_was_deleted, filter_state
+
+    try:
+        with open('save.bin', 'rb') as save_file:
+            data = pickle.load(save_file)
+    except IOError:
+        return
+    except pickle.UnpicklingError:
+        return
+    except EOFError:
+        return
+
+    # loading the data
+    timers = data[0]
+    timer_was_deleted = data[1]
+
+    # setting up tkinter widgets
+    for i in range(len(timers)):
+        timers[i].label_text = StringVar()
+        if timers[i].type == 'Timer':
+            timers[i].label_text.set(interval_formatted(i))
+        else:
+            month = str(timers[i].time_point.get('month'))
+            day = str(timers[i].time_point.get('day'))
+            hour = str(timers[i].time_point.get('hour'))
+            minute = str(timers[i].time_point.get('minute'))
+            second = str(timers[i].time_point.get('second'))
+            timers[i].label_text.set(time_point_formatted(month, day, hour, minute, second))
+        timers[i].label.append(Label(timer_list, textvariable=timers[i].label_text, font=bodoni26, foreground='#622651'))
+        timers[i].button.append(Button(timer_list, image=remove_icon, relief='flat', highlightthickness=1, bd=0))
+        # handling late binding
+        def set_bind(button, index=i):
+            button.bind(sequence='<Button-1>', func=lambda event: delete(index))
+        set_bind(timers[i].button[0])
+
+    # display widgets
+    filter_state = 'Everything'
+    refresh_timer_list()
+    filter_state = data[2]
+    refresh_timer_list()
+
+
 root = Tk()
 
 # global variables
 timers = []
 timer_was_deleted = False
-settings = PhotoImage(file="settings24px.gif")
+filter_state = 'Everything'
 add_icon = PhotoImage(file="add24.gif")
+remove_icon = PhotoImage(file='remove.gif')
+filter_icon = PhotoImage(file='filter.gif')
 file = ImageTk.PhotoImage(file="C:\\Users\\Clarity\\Desktop\\SimonRed1.png")
 bodoni26 = font.Font(family="Bodoni MT", name="Bodoni26", size=26)
+
 
 # main window setup
 root.title("NERV")
@@ -254,10 +423,10 @@ timer_list.configure(yscrollcommand=scroll_y.set)
 timer_list.bind_all("<MouseWheel>", scroll_timer_list)
 sidebar = Canvas(root_frame, width=25, height=200, highlightthickness=0)
 sidebar.grid(row=0, column=1)
-button_settings = Button(sidebar, image=settings, bd=0, highlightthickness=0)
+button_filter = Button(sidebar, image=filter_icon, command=filter_setting, bd=0, highlightthickness=0)
 button_add = Button(sidebar, image=add_icon, command=lambda: add(), bd=0, )
-sidebar.create_window(10, 15, window=button_settings)
-sidebar.create_window(10, 40, window=button_add)
+sidebar.create_window(10, 15, window=button_add)
+sidebar.create_window(10, 40, window=button_filter)
 
 # background setup
 window2 = Toplevel()
@@ -273,6 +442,11 @@ root.bind("<FocusIn>", focus_handling)
 root.bind("<Configure>", force_background)
 sidebar.bind("<Unmap>", minimize_bg)
 root.bind("<Map>", unminimize_bg)
+
+#root.iconbitmap(r'C:\Users\Clarity\Desktop\Kamina.ico')
+#window2.iconbitmap(r'C:\Users\Clarity\Desktop\Kamina.ico')
+root.protocol("WM_DELETE_WINDOW", save)
+load()
 
 count()
 root.mainloop()

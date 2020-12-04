@@ -10,7 +10,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdabb935-4350-4f4e-8686-129ccccb50c6" name="Default Changelist" comment="" />
+    <list default="true" id="bdabb935-4350-4f4e-8686-129ccccb50c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/filter.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/remove.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,11 +34,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kL8IWtb7L4qImcLzNchdCdzLUY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="consentGiven" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -205,78 +216,7 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="466" y="203" key="#Inspections" timestamp="1605837639497">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="466" y="203" key="#Inspections/0.0.1680.1050@0.0.1680.1050" timestamp="1605837639497" />
-    <state x="447" y="162" width="816" height="730" key="#Intentions" timestamp="1606137143465">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="447" y="162" width="816" height="730" key="#Intentions/0.0.1680.1050@0.0.1680.1050" timestamp="1606137143465" />
-    <state x="558" y="354" key="#Notifications" timestamp="1606499087618">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="558" y="354" key="#Notifications/0.0.1680.1050@0.0.1680.1050" timestamp="1606499087618" />
-    <state x="231" y="239" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605469449749">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="231" y="239" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605469449749" />
-    <state x="567" y="563" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605468629319">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="567" y="563" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1605468629319" />
-    <state x="698" y="294" key="FileChooserDialogImpl" timestamp="1605845081886">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="698" y="294" key="FileChooserDialogImpl/0.0.1680.1050@0.0.1680.1050" timestamp="1605845081886" />
-    <state width="395" height="943" key="GridCell.Tab.0.bottom" timestamp="1606846991613">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="395" height="943" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1606846991613" />
-    <state width="395" height="943" key="GridCell.Tab.0.center" timestamp="1606846991613">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="395" height="943" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1606846991613" />
-    <state width="395" height="943" key="GridCell.Tab.0.left" timestamp="1606846991613">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="395" height="943" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1606846991613" />
-    <state width="395" height="943" key="GridCell.Tab.0.right" timestamp="1606846991613">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="395" height="943" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1606846991613" />
-    <state width="1502" height="339" key="GridCell.Tab.1.bottom" timestamp="1606772524169">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1502" height="339" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1606772524169" />
-    <state width="1502" height="339" key="GridCell.Tab.1.center" timestamp="1606772524169">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1502" height="339" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1606772524169" />
-    <state width="1502" height="339" key="GridCell.Tab.1.left" timestamp="1606772524169">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1502" height="339" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1606772524169" />
-    <state width="1502" height="339" key="GridCell.Tab.1.right" timestamp="1606772524169">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1502" height="339" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1606772524169" />
-    <state x="274" y="165" key="SettingsEditor" timestamp="1606472509858">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="274" y="165" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1606472509858" />
-    <state x="223" y="196" width="1200" height="800" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605469307339">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="223" y="196" width="1200" height="800" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605469307339" />
-    <state x="335" y="274" width="621" height="451" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1605852368544">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="335" y="274" width="621" height="451" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605852368544" />
-    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1606834901344">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="503" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1606834901344" />
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -6,7 +6,6 @@ from copy import deepcopy
 from playsound import playsound
 import threading
 
-a = 5
-
-if a in {1, 2, 3, 4, 5} or a < 0:
-    print('yay')
+a = [0, 1, 2, 3, 4]
+del a[2]
+print(a[2])

@@ -1,4 +1,5 @@
 (откройте в режиме редактирования или normal view, чтобы было видно форматирование текста)
+
 learning process of the python tkinterGUI and other topics needed to develop timers app
 
 nov 17:    I'm done trying to learn pyqt, switching to tkinter, created repository

@@ -5,7 +5,8 @@ from tkinter import messagebox
 from copy import deepcopy
 from playsound import playsound
 import threading
+import datetime
 
-a = [0, 1, 2, 3, 4]
-del a[2]
-print(a[2])
+start = datetime.datetime.today()
+
+print(start)

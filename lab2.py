@@ -8,11 +8,12 @@ import threading
 import math
 import time
 import pickle
-
+import datetime
 
 class Timer:
     last_id = 0
-
+    last_shortest = 0
+    
     def __init__(self):
         self.interval = 0
         self.signal = 'Auratone'
@@ -73,6 +74,36 @@ def filter_setting():
 
 
 def refresh_timer_list():
+    def time_point_into_interval(month, d, h, minute, s):
+        t = time.localtime()
+        year_is_this_one = True
+        # order is important here, laziness is exploited
+        if month - t.tm_mon < 0 or month - t.tm_mon == 0 and d - t.tm_mday < 0 or d - t.tm_mday == 0 and h - t.tm_hour < 0 or h - t.tm_hour == 0 and minute - t.tm_min < 0 or minute - t.tm_min == 0 and s - t.tm_sec < 0:
+            year_is_this_one = False
+
+        alarm_year = t.tm_year if year_is_this_one else t.tm_year + 1
+
+        end = datetime.datetime(alarm_year, month, d, h, minute, s)
+        begin = datetime.datetime.today()
+        return (end - begin).total_seconds()
+
+    def the_shortest():
+        curr_interval = timers[0].interval if timers[0].type == 'Timer' else time_point_into_interval(timers[0].time_point.get('month'), timers[0].time_point.get('day'), timers[0].time_point.get('hour'), timers[0].time_point.get('minute'), timers[0].time_point.get('second'))
+        index = 0
+        for i in range(len(timers)):
+            month = timers[i].time_point.get('month')
+            day = timers[i].time_point.get('day')
+            hour = timers[i].time_point.get('hour')
+            minute = timers[i].time_point.get('minute')
+            second = timers[i].time_point.get('second')
+            if timers[i].type == 'Timer' and timers[i].interval < curr_interval:
+                curr_interval = timers[i].interval
+                index = i
+            elif timers[i].type == 'Alarm' and time_point_into_interval(month, day, hour, minute, second) < curr_interval:
+                curr_interval = time_point_into_interval(month, day, hour, minute, second)
+                index = i
+        return index
+
     def actually_just_refresh():
         for j in range(len(timers)):
             timer_list.create_window(240, 40 * j, window=timers[j].label[0], anchor='ne')
@@ -113,6 +144,12 @@ def refresh_timer_list():
         actually_just_refresh()
     else:
         sort_by_type()
+    try:
+        timers[Timer.last_shortest].label[0]['foreground'] = '#622651'
+    except IndexError:
+        pass
+    Timer.last_shortest = the_shortest()
+    timers[Timer.last_shortest].label[0]['foreground'] = 'black'
 
 
 @thread
@@ -253,6 +290,7 @@ def alarm_setup():
         timer_list.create_window(260, (40 * (len(timers) - 1)) + 15, window=timers[-1].button[0], anchor='ne')
         nonlocal alarm_setup_window
         alarm_setup_window.destroy()
+        refresh_timer_list()
 
     alarm_setup_window = Toplevel()
     alarm_setup_window.attributes("-topmost", True)
@@ -298,6 +336,7 @@ def timer_setup():
         timer_list.create_window(240, 40 * (len(timers) - 1), window=timers[-1].label[0], anchor='ne')
         timer_list.create_window(260, (40 * (len(timers) - 1)) + 15, window=timers[-1].button[0], anchor='ne')
         timer_setup_window.destroy()
+        refresh_timer_list()
 
     timer_setup_window = Toplevel()
     timer_setup_window.attributes("-topmost", True)
@@ -388,6 +427,13 @@ def change_volume_state():
     sidebar.create_window(14, 65, window=button_volume_state)
 
 
+def delete_all():
+    for i in range(len(timers)):
+        timers[i].label[0].destroy()
+        timers[i].button[0].destroy()
+    timers.clear()
+
+
 root = Tk()
 
 # global variables
@@ -397,6 +443,7 @@ filter_state = 'Everything'
 add_icon = PhotoImage(file="lab2/icons/add24.gif")
 remove_icon = PhotoImage(file='lab2/icons/remove.gif')
 filter_icon = PhotoImage(file='lab2/icons/filter.gif')
+delete_bin_icon = PhotoImage(file='lab2/icons/delete_bin.gif')
 volume_state_icon = PhotoImage(file='lab2/icons/volume_on.gif')
 volume_is_on = True
 file = ImageTk.PhotoImage(file="lab2/SimonRed1.png")
@@ -420,9 +467,11 @@ sidebar.grid(row=0, column=1)
 button_filter = Button(sidebar, image=filter_icon, command=filter_setting, bd=0, highlightthickness=0)
 button_add = Button(sidebar, image=add_icon, command=lambda: add(), bd=0, )
 button_volume_state = Button(sidebar, image=volume_state_icon, command=change_volume_state, bd=0)
+button_delete_bin = Button(sidebar, image=delete_bin_icon, command=delete_all, bd=0)
 sidebar.create_window(10, 15, window=button_add)
 sidebar.create_window(10, 40, window=button_filter)
 sidebar.create_window(14, 65, window=button_volume_state)
+sidebar.create_window(10, 95, window=button_delete_bin)
 
 # background setup
 window2 = Toplevel()

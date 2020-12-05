@@ -9,11 +9,13 @@ import math
 import time
 import pickle
 import datetime
+import sys
+
 
 class Timer:
     last_id = 0
     last_shortest = 0
-    
+
     def __init__(self):
         self.interval = 0
         self.signal = 'Auratone'
@@ -362,7 +364,7 @@ def timer_setup():
 
 def save():
     if len(timers) == 0:
-        exit()
+        sys.exit()
 
     # tkinter widgets can not be pickled, fortunately we don't have to save them
     for i in range(len(timers)):
@@ -374,9 +376,9 @@ def save():
     try:
         with open('lab2/save.bin', 'wb') as save_file:
             pickle.dump(data, save_file)
-            exit()
+            sys.exit()
     except pickle.PicklingError:
-        exit(1)
+        sys.exit(1)
 
 
 def load():

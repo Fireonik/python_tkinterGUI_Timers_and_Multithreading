@@ -2,51 +2,65 @@ learning process of the python tkinterGUI and other topics needed to develop tim
 
 nov 17:    I'm done trying to learn pyqt, switching to tkinter, created repository
 
-nov 18:    practiced using simplest widgets, fonts, colors, and canvas widget in particular; 
-           learned how to place widgets onto the canvas, build .EXE with custom icon, 
-           built my first graphic and first .exe app NERV.exe
+nov 18:    practiced using simplest widgets, fonts, colors, and canvas widget in particular; learned how to place widgets onto the canvas, build .EXE with custom icon, built my            first graphic and first .exe app NERV.exe
         
-nov 19:    learned how to make buttons with custom icons to keep GUI nice and simple, 
-           and how to modificate icons in paint.NET, how to make tkinter canvas scrollable, 
-           learned basics on parallel threads, learned about @decorators in python
+nov 19:    learned how to make buttons with custom icons to keep GUI nice and simple, and how to modificate icons in paint.NET, how to make tkinter canvas scrollable, learned              basics on parallel threads, learned about @decorators in python
 
-nov 20:    learned about creating windows separate from main in tkinter, how to change 
-           contents of the current window, how to remove borders of the buttons, how to
-           create combobox and set a default value to it, done some designing work on 
-           the timer system, also learned about extensions system in pycharm and tried
-           deep code AI
+nov 20:    learned about creating windows separate from main in tkinter, how to change contents of the current window, how to remove borders of the buttons, how to create                  combobox and set a default value to it, done some designing work on the timer system, also learned about extensions system in pycharm and tried deep code AI
 
-nov 20-23: developed core features of the timers: timers can be added with a custom interval, 
-           there are 5 signals to choose from, timer quantity is not limited,  the list 
-           of timers can be seen as an abyssal scroll, each interval is displayed there,
-           displaying remaining time as it ticks; visual style of the app went through
-           redesign, now the app is very compact and light-looking. Most importantly,
-           timers work, and their ticking and signal displaying are handled with separate
-           threads so that time does not stop ticking while UI is used;  
-           Also since i want my app to look nice, (anything consisting of comboboxes on 
-           white background is ugly, basically) i developed idea on how to implement 
-           background in tkinter
+nov 20-23: developed core features of the timers: timers can be added with a custom interval, there are 5 signals to choose from, timer quantity is not limited,  the list of                timers can be seen as an abyssal scroll, each interval is displayed there, displaying remaining time as it ticks; visual style of the app went through redesign, now              the app is very compact and light-looking. Most importantly, timers work, and their ticking and signal displaying are handled with separate threads so that time does            not stop ticking while UI is used; Also since i want my app to look nice, (anything consisting of comboboxes on white background is ugly, basically) i developed idea            on how to implement background in tkinter
 
-nov 25-26: implemented background, learned some design basics like using color palettes, 
-           tweaked icons, changed font, implemented conversion of the time interval in
-           seconds into time format, encountered memory leaks, reworked multithreading
-           to eliminate all leaks (yet still didnt figure out how looped creation-destruction
-           of the thread causes it), cleaned up the code a bit, added a few comments, fixed
-           a few problems in the code
+nov 25-26: implemented background, learned some design basics like using color palettes, tweaked icons, changed font, implemented conversion of the time interval in seconds into            time format, encountered memory leaks, reworked multithreading to eliminate all leaks (yet still didnt figure out how looped creation-destruction of the thread causes            it), cleaned up the code a bit, added a few comments, fixed a few problems in the code
 
 nov 30:    strange bug already wasted abyss of time and looks like it is going to waste another
 
-dec 1:     finally fixed the bug, created interface for alarm setup, reworked  ~ >50% of code
-           while searching for the bug, achieving much shorter, more readable and simple code
-           than before
+dec 1:     finally fixed the bug, created interface for alarm setup, reworked  ~ >50% of code while searching for the bug, achieving much shorter, more readable and simple code            than before
 
-dec 2-3    implemented alarms, timers and alarms can be deleted by user now, implemented sorting
-           by filter (well, yeah, tkinter is, um, a bit limited in its capabilities: since there
-           is no way to temporarily remove widgets from canvas, proper filtering was impossible
-           to implement (well, maybe it was possible with a complete redesign of a program)
-           and also i discovered that tkinter does not support operations with taskbar: it can't
-           minimize into tray, it can't display anything on taskbar icon and now i can't do
-           precisely the additional tasks i planned to do; I also made some funny sound signals
-           so that they don't sound utterly generic
+dec 2-3    implemented alarms, timers and alarms can be deleted by user now, implemented sorting by filter (well, yeah, tkinter is, um, a bit limited in its capabilities: since            there is no way to temporarily remove widgets from canvas, proper filtering was impossible to implement (well, maybe it was possible with a complete redesign of a                program) and also i discovered that tkinter does not support operations with taskbar: it can't minimize into tray, it can't display anything on taskbar icon and now i            can't do precisely the additional tasks i planned to do; I also made some funny sound signals so that they don't sound utterly generic
 
-dec 4      implemented 'do not disturb' mode, *ill finish this entry tomorrow*
+dec 4-5    implemented 'do not disturb' mode, 'delete all' button, highlighting the shortest timer/alarm feature, saving current state onto hard drive on exit, final                        optimization tweaks; This is the release version.
+
+Анализ:    Решение использовать ткинтер привело к тому, что я упёрся во множество ограничений библиотеки, которые делали необходимые свойства программы либо совсем невозможными            для разработки, либо создавали необходимость танцевать вокруг проблем, приводя к решениям, которые имеют несколько сомнительный вид. Скажем, задний фон приложения:              он-то реализован, и в общем-то не то чтобы дорого стоит с точки зрения использования ресурсов компьютера, однако, как-то не особо язык поворачивается сказать что                специальное окно без рамки, синхронизирующее свои координаты с главным окном, фон которого прозрачный - то, как должен работать задний фон. Однако же, это                        единственный способ реализации заднего фона в ткинтере.
+           
+.          Невозможными оказались любые операции с панелью задач, сворачивание в трей, даже реализация фильтров списка таймеров: временно убрать виджет с виджета-полотна                    невозможно, так что максимум того что удалось реализовать это сортировка, ещё и реализованная весьма грубо, это, наверное, худший из алгоритмов задействованных в                программе; Конечно, можно было, сделать что-то вроде складывания виджетов-таймеров в область полотна, недоступную для просмотра, но это совсем не звучит как                      вменяемая реализация. Другое дело что, используй я Qt, скорее всего, до сих пор не продвинулся бы особо дальше чем окно с кнопкой
+
+.          Надо сказать, количество опыта приобретённого в ходе разработки лабораторной работы ощущается как гора:
+           - Изучил абсолютно новый для себя язык программирования до состояния навыка владения С++ и даже дальше; столкнулся с множеством новых аспектов программирования:                    функции использующие функции в качестве аргументов, динамической типизацией, и т.д. 
+           - Программировал не линейную последовательность команд, а систему, работающую во времени, что существенно отличается в разработке;
+           - Научился создавать приложения, обладающие графическим интерфейсом, состоящим из виджетов модуля tkinter
+           - Научился собирать код в .EXE файлы с указанными иконками
+           - Научился использовать множественные потоки исполнения программы
+           - Освоил некоторые навыки дизайна интерфейсов: работал со шрифтами, цветами, цветовыми палитрами, графическими редакторами, учился редактировать иконки
+           - Научился проигрывать звуковые файлы с помощью программного кода; не знаю считаются ли навыки работы с программами синтезирующими речь имеющими значение
+           - Научился вручную проигрывать .gif изображения с помощью python (в результате не использовал в программе) 
+           - Научился работать с исключениями и использовать менеджер контекста with
+           - Заметил развитие чистоты и понятности кода в ходе выполнения этой лабораторной, оптимизировал много кода, чтобы заметить это надо копаться в предыдущих версиях                  однако едва не все более-менее крупные функции в финальной версии программы занимают в два раза меньше строк чем раньше, особенно лучше стал обращаться с 
+             программной логикой: логические конструкции, состоящие из множества условных операторов стали весьма компактными, часто сведенными к одной логической формуле, 
+             блоками кода, использующими даже "ленивость" логических выражений в пайтоне; хорошие примеры - функции interval_formatted, time_point_formatted,                                  change_volume_state, the_time_has_come - например, последняя была двумя функциями такого же размера вчера;
+             
+.            Разработка заняла 19 дней, из них >70% были потрачены на разработку полностью ( >10 часов/день), 2 дня (10%) были выходными, и до 20% задействовали 6-8 часов 
+             Без выходных - 17 дней, из них примерно 7 ушло на исправление багов и выход из "тупиковых" ситуаций (что-то вроде: реализовать что-то надо а способа нет в                        силу ограничений библиотеки или же его реализация невозможна в силу особенностей текущей реализации программы, и подобные вещи), в частности 4 дня ушло на баг,                  который полностью ломал программу при скролле, он оказался в довольно неожиданном месте которое я смог найти только перекопав половину кода программы. Я не                      обнаружил его сразу, потому что не ожидал что изменение, создавшее его, затронет область в которой баг возникал, и обнаружил его только случайно, спустя                          существенное количество изменений в коде, что обуспечило невозможность существенного сужения круга поиска источника. За то, у меня получилось реализовать многие                  вещи существенно лучше чем в первый раз; в основном это связано с тем что первый раз был первым и для разработки на пайтоне и для ткинтера.
+             Я не учитывал время, потраченное на попытки разобраться в Qt, не увенчавшиеся вообще каким-либо успехом, но это заняло где-то 7 дней
+             Из проблем, замедляющих разработку, можно заметить необходимость программы работать как система во времени а не линейная последовательность событий. Привычные пути              внутреннего хранения информации просто не работают если к моменту когда данные нужны, функция, в которой они вроде как были нужны, уже закончила свою работу, это                ломает привычный ход мышления. Конечно, давление оказала и необходимость разработки программы в условиях, когда 7 дней уже потрачены с нулевым результатом и надо                начинать всё сначала, ровно как и потеря едва не целой рабочей недели на поиск одной проблемы.
+             
+Реализовано:   Базовые условия:
+             - Возможность запуска таймеров, звуковой и визуальный сигнал по завершении времени
+             - Таймеры на определенный промежуток времени(собственно таймеры) и до определённого момента времени(будильники), реализованы как один список(как в смысле хранения в                одной структуре данных типа "список", так и в смысле отображения как единого списка
+             - Возможность запуска любого количества таймеров(будильников), работающих одновременно
+             - Удобный интерфейс для просмотра списка таймеров в виде бездонного списка, возможность управления таймерами: если таймер нужен, его можно создать, если таймер                    больше не нужен, его можно удалить, если таймер стал не нужен и стал нужен другой таймер, можно удалить его и создать нужный, таким образом можно полностью                      определить список таймеров произвольным образом. 
+               
+.              Дополнительные условия(из файла с заданием и реализованные мной по собственному желанию):
+             - Возможность сортировки таймеров
+             - Таймеры могут быть установлены на произвольный интервал\момент времени, не на фиксированные количества времени; Звуковой сигнал может быть настроен, существует                  набор звуковых сигналов на выбор пользователя, в том числе специальные нестандартные сигналы голосом "гугл мужика"
+             - Возможность установки режима "не беспокоить", в котором сигналы таймеров/будильников не воспроизводятся
+             - Возможность запоминать текущие таймеры на жёсткий диск и продолжать работу после перезапуска приложения или ОС; Работает полностью автоматически, сохранение                      встроено в процедуру закрытия приложения, загрузка встроена в запуск
+             - Работа со временем реализована не через UTC, а через обращение к местному времени, так что программа будет корректно работать при запуске в любом часовом поясе
+             - Выделение таймера\будильника, который сработает первым - он отмечен чёрным цветом
+             - Наличие заднего фона приложения
+             - Кнопка "удалить всё"
+             - Отображение таймеров в процессе их "тикания", то есть визуальное отображение интервала таймера в реальном времени
+             - Большинство кнопок в приложении реализованы не в качестве стандартных кнопок со стандартным текстом, а как визуальные изображения соответствующих иконок: кнопка                  "добавить" имеет иконку плюсика, кнопка "удалить всё" имеет иконку корзины для мусора, кнопка переключения звукового режима имеет иконку динамика с волной звука в                обычном режиме и иконку динамика с крестиком на месте звуковой волны в режиме "не беспокоить", и т.д. Там, где использование текста было оценено целесообразным,                  использован текст. Иконки отредактированы вручную для соответствия цветовой палитре (в основном я имею в виду коррекцию фона, там не совсем белый цвет) 
+             - Все виджеты использованы не просто "в голом виде", были использованы опции настройки вида виджета - настроены параметры шрифта, цвета, стиля, в том числе цвет                    кнопок спинбокс-виджета. Размер, "утопленность" в окно кнопок выбора Таймер/Будильник и выбора фильтра - выбраны сознательно; если виджет использует стандартный                  рельеф - значит, я посмотрел на остальные рельефы и решил использовать стандартный. Сюда же добавлю что размер окна, несворачиваемость и минимализм интерфейса -                  всё использовано сознательно, я пытался сделать приложение таким будто всерьёз разрабатываю его для себя, то есть я соберу его в исполняемый файл и оставлю себе                  на будущее. По той же причине, например, не реализованы подсказки к таймерам - я не могу придумать внятное обьяснение зачем мне это могло бы понадобится; Не то                  чтобы я просто так отказался от дополнительного задания - ну почему, 
+               messagebox.showinfo(title="NERV", message="Setting up a timer of different type recommended")
+               если добавить эту строку в 51 строку кода программы, можно говорить что подсказка о установке другого типа таймера реализована, просто мне больше нравится                        приложение без этой строки
+             

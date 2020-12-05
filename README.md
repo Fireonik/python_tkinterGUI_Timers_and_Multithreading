@@ -1,4 +1,4 @@
-(откройте в режиме редактирования или normal view, чтобы было видно форматирование текста)
+(откройте в режиме редактирования, чтобы было видно форматирование текста)
 
 learning process of the python tkinterGUI and other topics needed to develop timers app
 
